@@ -3,11 +3,11 @@
     <head>
         <title>Home Page - Enterprise Cars</title>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="CSS/HomeWidth1200" media="(min-width:1200px)">
-        <link rel="stylesheet" href="CSS/HomeWidth1024" media="(min-width:1024px) and (max-width:1200px)">
-        <link rel="stylesheet" href="CSS/HomeWidth720" media="(min-width:720px) and (max-width:1024px)">
-        <link rel="stylesheet" href="CSS/HomeWidth480" media="(min-width:481px) and (max-width:720px)">
-        <link rel="stylesheet" href="CSS/HomeWidth320" media="(min-width:320px) and (max-width:480px)">
+        <link rel="stylesheet" href="CSS/HomeWidth1200.css" media="(min-width:1200px)">
+        <link rel="stylesheet" href="CSS/HomeWidth1024.css" media="(min-width:1024px) and (max-width:1200px)">
+        <link rel="stylesheet" href="CSS/HomeWidth720.css" media="(min-width:720px) and (max-width:1024px)">
+        <link rel="stylesheet" href="CSS/HomeWidth480.css" media="(min-width:481px) and (max-width:720px)">
+        <link rel="stylesheet" href="CSS/HomeWidth320.css" media="(min-width:320px) and (max-width:480px)">
 
         <link href="CSS/custom-theme/jquery-ui-1.10.3.custom.css" rel="stylesheet">
         <script src="js/jquery-1.9.1.js"></script>
@@ -93,7 +93,9 @@
                                 featureClass: "P",
                                 style: "full",
                                 maxRows: 10,
-                                name_startsWith: request.term
+                                name_startsWith: request.term,
+                                username: "prehaljain08",
+                                country: "US"
                             },
                             success: function(data) {
                                 response($.map(data.geonames, function(item) {
