@@ -81,11 +81,6 @@ body{
 #headerBottom ul #myreservationsbtn{
     display: none;
 }
-#headerBottom li #login-div{
-    display: none;
-    text-align: left;
-    padding: 5px;
-}
 #headerBottom ul li a{
     text-decoration: none;
     display: block;
@@ -96,20 +91,22 @@ body{
     background: #cef8e1 url(custom-theme/images/ui-bg_inset-hard_75_cef8e1_1x100.png) 50% 50% repeat-x;
     color: #04c586;
 }
-#headerBottom li:hover #login-div{
+.login-div.login-div1{
     display: block;
     position: absolute;
     z-index: 1000;
     margin-top: 9px;
     margin-left: -15px;
 }
-#login-div{
+.login-div{
    width: 150px;
    background-color: white;
    border: thin solid #04c586;;
    display: none;
    border-radius: 4px;
    box-shadow: 0px 0px 6px 2px #eeeeee;
+   text-align: left;
+   padding: 5px;
 }
 #loginfields input{
     margin-bottom: 7px;

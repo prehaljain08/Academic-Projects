@@ -4,178 +4,17 @@
     <head>
         <title>Home Page - Enterprise Cars</title>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="CSS/AfterLogin1200" media="(min-width:1200px)">
-        <link rel="stylesheet" href="CSS/AfterLogin1024" media="(min-width:1024px) and (max-width:1200px)">
-        <link rel="stylesheet" href="CSS/AfterLogin720" media="(min-width:720px) and (max-width:1024px)">
-        <link rel="stylesheet" href="CSS/AfterLogin480" media="(min-width:481px) and (max-width:720px)">
-        <link rel="stylesheet" href="CSS/AfterLogin320" media="(min-width:320px) and (max-width:480px)">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <link rel="stylesheet" href="CSS/AfterLogin1200.css" media="(min-width:1200px)">
+        <link rel="stylesheet" href="CSS/AfterLogin1024.css" media="(min-width:1024px) and (max-width:1200px)">
+        <link rel="stylesheet" href="CSS/AfterLogin720.css" media="(min-width:720px) and (max-width:1024px)">
+        <link rel="stylesheet" href="CSS/AfterLogin480.css" media="(min-width:481px) and (max-width:720px)">
+        <link rel="stylesheet" href="CSS/AfterLogin320.css" media="(min-width:320px) and (max-width:480px)">
 
         <link href="CSS/custom-theme/jquery-ui-1.10.3.custom.css" rel="stylesheet">
         <script src="js/jquery-1.9.1.js"></script>
         <script src="js/jquery-ui-1.10.3.custom.js"></script>
-
-        <script>
-            $(document).ready(function() {
-                $("#returnLocation").css("display", "none");
-                $("#myreservationsbtn").button();
-                $("#viewallbtn").button();
-                $("#loginbutton").button();
-                $("#signupbutton").button();
-                $("#submitbutton").button();
-                $("#findreserbutton").button();
-                $("#printbutton").button();
-                $("#learnbutton").button();
-                $("#tabs").tabs();
-                $("#pickupdatepicker").datepicker({minDate: 0, maxDate: "+6M"});
-                $("#returndatepicker").datepicker({minDate: 0, maxDate: "+1Y"});
-                if ($(window).width() <= 720) {
-                    $("#smallmenu").click(function() {
-                        var display = $("#menu").css("display");
-                        if (display == 'none') {
-                            $("#menu").css("display", "block");
-                        }
-                        else {
-                            $("#menu").css("display", "none");
-                        }
-                    });
-                }
-                
-                $( document ).tooltip({
-			position: {
-				my: "center bottom-20",
-				at: "center top",
-				using: function( position, feedback ) {
-					$( this ).css( position );
-					$( "<div>" )
-						.addClass( "arrow" )
-						.addClass( feedback.vertical )
-						.addClass( feedback.horizontal )
-						.appendTo( this );
-				}
-			}
-		});
-
-                $("#signupdiv").dialog({
-                    autoOpen: false,
-                    width: 500,
-                    modal: true,
-                    create: function (){
-                        $("#passwordtxt").keyup(function (){
-                            $("#strength").css("display", "block");
-                            var pwdLength = $(this).val();
-                           if(pwdLength.length < 3){
-                               $("#strengthtxt").html("Weak");
-                               $("#makeimg").css("background-color", "red");
-                               $("#makeimg").css("width", "20px");
-                           }
-                           else if(pwdLength.length < 7){
-                               $("#strengthtxt").html("Medium");
-                               $("#makeimg").css("background-color", "Yellow");
-                               $("#makeimg").css("width", "40px");
-                           }
-                           else{
-                               $("#strengthtxt").html("Strong");
-                               $("#makeimg").css("background-color", "green");
-                               $("#makeimg").css("width", "60px");
-                           }
-                        });
-                    }
-                });
-                $("#viewallbtn").click(function(evt) {
-                    $("#signupdiv").dialog("open");
-                    evt.preventDefault();
-                });
-
-
-                if ($(window).width() <= 480) {
-                    $("#notmember").hide();
-                }
-
-
-
-                $("#checkbox").click(function() {
-                    $("#returnLocation").toggle(this.checked);
-                });
-
-                function log(message) {
-                }
-
-                $("#pickuptext, #droptext").autocomplete({
-                    source: function(request, response) {
-                        $.ajax({
-                            url: "http://ws.geonames.org/searchJSON",
-                            datatype: "jsonp",
-                            data: {
-                                featureClass: "P",
-                                style: "full",
-                                maxRows: 10,
-                                name_startsWith: request.term
-                            },
-                            success: function(data) {
-                                response($.map(data.geonames, function(item) {
-                                    return{
-                                        value: item.name + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName
-                                    };
-                                }));
-                            }
-                        });
-                    },
-                    minLength: 2,
-                    select: function(event, ui) {
-                        log(ui.item ? "Selected: " + ui.item.label : "Nothing selected, input was " + this.value);
-                    }
-                });
-
-
-                $("#backtotop").hide();
-                $(window).scroll(function() {
-                    if ($(this).scrollTop() > 100) {
-                        $('#backtotop').fadeIn();
-                    } else {
-                        $('#backtotop').fadeOut();
-                    }
-                });
-                $('.backtotop').click(function() {
-                    $('html, body').animate({
-                        scrollTop: 0
-                    }, 'slow');
-                });
-                
-                $("#showmeall").click(function (evt){
-                    evt.preventDefault();
-                });
-                
-                var showmeall = false; 
-                
-                $("#carimagesul > li > a").on("click", function (evt){
-                   var type = $(this).html();
-                    $("#showmeall").html(type);
-                    $("#carimagesul").css("display", "none");
-                    a = true;
-                    show(a);
-                    evt.preventDefault();
-                });                
-                
-                
-                $("#myreservationsbtn").hover(function (){
-                    $.post("history.php").done(function (data){
-                        $("#loginfields").html(data);
-                    });
-                });                
-            });
-            
-            function show (a){
-                if(a == true){
-                    $("#showmeall").hover(function (){
-                        $("#carimagesul").css("display", "block");
-                    })
-                }
-            }
-        </script>
-
-
-
-
+        <script src="js/AfterLogin.js"></script>
     </head>
     <body>
         <div id="pageContainer">
@@ -203,16 +42,10 @@
                         <ul>
                             <li class="right" id="loginbutton"><a href="logout.php">Logout</a></li> 
                             <li class="right" id="myreservationsbtn"><a href="">My Reservations</a>
-                                <div id="login-div">
+                                <div id="login-div" class="login-div">
                                         <div id="loginfields">
                                             <table>
-                                                    <tr>
-                                                        <td>date</td>
-                                                        <td>cost</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="2"><input type="submit" name="viewallbtn" value="View All" id="viewallbtn"/></td>
-                                                    </tr>                                                
+                                                                                                   
                                             </table>
                                         </div>
                                 </div>
